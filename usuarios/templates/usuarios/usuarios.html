@@ -9,6 +9,13 @@ Usuarios
 {% endblock h1_header %}
 
 {% block main %}
+    <div style="width:30%;">
+        <form action="">
+            <input type="text" name="buscar" class="elementoFormularioBuscar" placeholder="Buscar...">
+            <input type="submit" value="Buscar" class="botonBuscar">
+        </form>
+    </div>
+    
     <ul>
         {% for usuario in listado_de_usuarios %}
             <li>{{usuario}}</li>

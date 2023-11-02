@@ -3,7 +3,13 @@ from django.shortcuts import render
 from usuarios.models import Usuario
 
 def usuarios (request):
-    listado_de_usuarios = Usuario.objects.all
+    buscador = request.GET.get('buscar')
+    
+    if buscador:
+        listado_de_usuarios = Usuario.objects.filter(nombre_usuario__icontains = buscador.lower())
+    else:
+        listado_de_usuarios = Usuario.objects.all
+    
     return render(request, 'usuarios/usuarios.html',{'listado_de_usuarios': listado_de_usuarios})
 
 def altaUusarios(request):
@@ -14,6 +20,6 @@ def altaUusarios(request):
         password = request.POST.get('password')
         ultima_vez = datetime.now()
 
-        usuario = Usuario(nombre_usuario = nombre_usuario, nombre = nombre, apellido = apellido, password = password, ultima_vez = ultima_vez)
+        usuario = Usuario(nombre_usuario = nombre_usuario.lower(), nombre = nombre, apellido = apellido, password = password, ultima_vez = ultima_vez)
         usuario.save()
     return render(request, 'usuarios/altaUsuarios.html', {})
