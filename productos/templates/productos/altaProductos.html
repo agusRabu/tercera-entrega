@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Alta Usuarios
+{% endblock title_head %}
+
+{% block h1_header %}
+Alta Usuarios
+{% endblock h1_header %}<
+
+{% block header %}{% endblock header %}
+
+{% block main %}
+<div class="centrarFormulario">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="nombre_producto" class="elementosFormulario">Nombre de producto:</label><br>
+        <input type="text" name="nombre_producto" id="nombre_producto" class="elementosFormulario"><br>
+        
+        <label for="stock" class="elementosFormulario">Stock</label><br>
+        <input type="number" name="stock" id="stock" class="elementosFormulario"><br>
+        
+        <label for="categoria" class="elementosFormulario">Categoría:</label><br>
+        <select name="categoria" id="categoria"  class="elementosFormulario">
+            <option value ="1">Accesorios</option>
+            <option value ="2">Periféricos</option>
+            <option value ="3">Algo mas</option>
+            <option value ="4">Lorem ipsum</option>
+        </select><br>
+        
+        <input type="submit" class="botonFormulario" vlaue="Crear">
+    </form>
+</div>
+
+{% endblock main %}

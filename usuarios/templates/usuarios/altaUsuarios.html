@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Alta Usuarios
+{% endblock title_head %}
+
+{% block h1_header %}
+Alta Usuarios
+{% endblock h1_header %}<
+
+{% block header %}{% endblock header %}
+
+{% block main %}
+<div class="centrarFormulario">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="nombre_usuario" class="elementosFormulario">Nombre de usuario:</label><br>
+        <input type="text" name="nombre_usuario" class="elementosFormulario"><br>
+        
+        <label for="nombre" class="elementosFormulario">Nombre de pila:</label><br>
+        <input type="text" name="nombre" id="nombre" class="elementosFormulario"><br>
+        
+        <label for="apellido" class="elementosFormulario">Apellido:</label><br>
+        <input type="text" name="apellido" id="apellido" class="elementosFormulario"><br>
+        
+        <label for="password" class="elementosFormulario">Contraseña:</label><br>
+        <input type="password" name="password" id="password"class="elementosFormulario"><br>
+        
+        <label for="repetirPassword" class="elementosFormulario">Repetir contraseña:</label><br>
+        <input type="password" name="repetirPassword" id="repetirPassword" class="elementosFormulario"><br>
+        
+        <input type="submit" class="botonFormulario" vlaue="Crear">
+    </form>
+</div>
+
+{% endblock main %}
