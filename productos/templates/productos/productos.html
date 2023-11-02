@@ -7,3 +7,11 @@ Productos
 {% block h1_header %}
 Productos
 {% endblock h1_header %}
+
+{% block main %}
+    <ul>
+        {% for producto in listado_de_productos %}
+            <li>{{producto}}</li>
+        {% endfor %}
+    </ul>
+{% endblock main %}

@@ -3,7 +3,8 @@ from django.shortcuts import render
 from usuarios.models import Usuario
 
 def usuarios (request):
-    return render(request, 'usuarios/usuarios.html')
+    listado_de_usuarios = Usuario.objects.all
+    return render(request, 'usuarios/usuarios.html',{'listado_de_usuarios': listado_de_usuarios})
 
 def altaUusarios(request):
     if request.method =='POST':

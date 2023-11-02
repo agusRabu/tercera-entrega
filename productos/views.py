@@ -2,7 +2,9 @@ from django.shortcuts import render
 from productos.models import Producto
 
 def productos (request):
-    return render(request, 'productos/productos.html', {})
+    listado_de_productos = Producto.objects.all
+
+    return render(request, 'productos/productos.html', {'listado_de_productos': listado_de_productos})
 
 def altaProductos (request):
     if request.method =='POST':

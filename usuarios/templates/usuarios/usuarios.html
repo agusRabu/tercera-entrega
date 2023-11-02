@@ -7,3 +7,11 @@ Usuarios
 {% block h1_header %}
 Usuarios
 {% endblock h1_header %}
+
+{% block main %}
+    <ul>
+        {% for usuario in listado_de_usuarios %}
+            <li>{{usuario}}</li>
+        {% endfor %}
+    </ul>
+{% endblock main %}
