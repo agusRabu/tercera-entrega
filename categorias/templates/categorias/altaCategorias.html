@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Alta Usuarios
+{% endblock title_head %}
+
+{% block h1_header %}
+Alta Usuarios
+{% endblock h1_header %}<
+
+{% block header %}{% endblock header %}
+
+{% block main %}
+<div class="centrarFormulario">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="nombre_categoria" class="elementosFormulario">Categoria:</label><br>
+        <input type="text" name="nombre_categoria" class="elementosFormulario"><br>
+        
+        <input type="submit" class="botonFormulario" value="Crear">
+    </form>
+</div>
+
+{% endblock main %}
