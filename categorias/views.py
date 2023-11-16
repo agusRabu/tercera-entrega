@@ -14,3 +14,6 @@ def altaCategorias(request):
         categoria = Categoria(nombre_categoria = nombre_categoria.lower())
         categoria.save()
     return render(request, 'categorias/altaCategorias.html', {})
+
+def eliminarCategoria(request):
+    ...

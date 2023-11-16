@@ -36,3 +36,8 @@
 .botonFormulario:hover, .botonBuscar:hover{
     background-color: #4872bd;
 }
+.parrafo{
+    width : 60%;
+    margin-top: 20px;
+    margin-left: 20%;
+}
