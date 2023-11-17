@@ -15,7 +15,9 @@ Usuarios
             <input type="submit" value="Buscar" class="botonBuscar">
         </form>
     </div>
-    
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
     <ul>
         {% for usuario in listado_de_usuarios %}
             <li>{{usuario}}</li>

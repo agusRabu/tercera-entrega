@@ -5,6 +5,7 @@ from usuarios.models import Usuario
 
 def usuarios (request):
     buscador = request.GET.get('buscar')
+    mensaje = None
     
     if buscador:
         listado_de_usuarios = Usuario.objects.filter(
@@ -12,10 +13,13 @@ def usuarios (request):
             Q(nombre__icontains=buscador.lower()) |
             Q(apellido__icontains=buscador.lower()) 
         )
+
+        if not listado_de_usuarios:
+            mensaje = "No se encontraron usuarios que coincidan con la búsqueda."
     else:
         listado_de_usuarios = Usuario.objects.all()
-    
-    return render(request, 'usuarios/usuarios.html',{'listado_de_usuarios': listado_de_usuarios})
+
+    return render(request, 'usuarios/usuarios.html', {'listado_de_usuarios': listado_de_usuarios, 'mensaje': mensaje})
 
 def altaUusarios(request):
     if request.method =='POST':
