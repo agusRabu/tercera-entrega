@@ -1,14 +1,19 @@
 from datetime import datetime
 from django.shortcuts import render
+from django.db.models import Q
 from usuarios.models import Usuario
 
 def usuarios (request):
     buscador = request.GET.get('buscar')
     
     if buscador:
-        listado_de_usuarios = Usuario.objects.filter(nombre_usuario__icontains = buscador.lower())
+        listado_de_usuarios = Usuario.objects.filter(
+            Q(nombre_usuario__icontains=buscador.lower()) |
+            Q(nombre__icontains=buscador.lower()) |
+            Q(apellido__icontains=buscador.lower()) 
+        )
     else:
-        listado_de_usuarios = Usuario.objects.all
+        listado_de_usuarios = Usuario.objects.all()
     
     return render(request, 'usuarios/usuarios.html',{'listado_de_usuarios': listado_de_usuarios})
 
