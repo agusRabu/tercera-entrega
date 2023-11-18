@@ -25,13 +25,17 @@
     width: 40%;
 }
 .elementoFormularioBuscar{
-    margin-top: 15px;
+    margin-top: 2px;
     width: 40%;
     border-radius: 5px;
     float: left;
     border: 1px;
     border-style: solid;
     border-color: #3a5890;
+    height: 100%;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 .botonFormulario:hover, .botonBuscar:hover{
     background-color: #4872bd;
@@ -42,4 +46,9 @@
     margin-left: 20%;
     background-color: #d8dce1;
     padding: 15px;
+}
+.divBuscar{
+    width:50%;
+    height: 10%;
+    margin-top: 10px;
 }
