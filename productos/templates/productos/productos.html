@@ -23,7 +23,6 @@ Productos
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Categoria</th>
@@ -33,12 +32,11 @@ Productos
                 <tbody>
             {% for producto in listado_de_productos %}
                 <tr>
-                    <td>{{forloop.counter}}</td>
                     <td>{{producto.id}}</td>
                     <td>{{producto.nombre_producto}}</td>
                     <td>{{producto.categoria}}</td>
                     <td><a href="edicionProducto/{{producto.id}}" class="btn btn-info">Editar</a></td>
-                    <td><a href="eliminarCurso/{{producto.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    <td><a href="eliminarProducto/{{producto.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
                 </tr>
             {% endfor %}
                     </tbody>

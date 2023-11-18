@@ -34,9 +34,9 @@ def altaProductos (request):
 
     return render(request, 'productos/altaProductos.html', {'categorias': categorias})
 
-def edicionProducto(request, nombre):
+def edicionProducto(request, id):
     categorias = Categoria.objects.all()
-    producto = Producto.objects.get(nombre_producto=nombre)
+    producto = Producto.objects.get(id=id)
     return render(request, "productos/edicionProducto.html", {"producto": producto, 'categorias': categorias})
 
 def editarProducto(request):
@@ -52,10 +52,12 @@ def editarProducto(request):
     producto.save()
     messages.success(request, '¡Producto actualizado!')
 
-def eliminarProducto(request, nombre):
-    producto = Producto.objects.get(nombre_producto=nombre)
+    return redirect('/productos')
+
+def eliminarProducto(request, id):
+    producto = Producto.objects.get(id=id)
     producto.delete()
 
     messages.success(request, '¡Producto eliminado!')
 
-    return redirect('/')
+    return redirect('/productos')

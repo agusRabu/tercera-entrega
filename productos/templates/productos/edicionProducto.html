@@ -32,17 +32,17 @@ Alta Usuarios
         <label for="categoria" class="elementosFormulario">Categoría:</label><br>
         <select name="categoria" id="categoria" value="{{producto.categoria}}  class="elementosFormulario">
             {% for c in categorias %}
-                {% if c.id ==  producto.categoria %}
+                {% if c.id ==  producto.categoria.id %}
                     <option value ="{{c.id}}" selected>{{c.nombre_categoria}}</option>
                 {% else %}
-                        <option value="{{ c.id }}">{{ c.nombre }}</option>
+                        <option value="{{ c.id }}">{{ c.nombre_categoria }}</option>
                 {% endif %}
            
             {% endfor %}
             <!-- Acá debería estar listando de la base pero ya no quiero más nada con esta entrega, para la próxima será-->
         </select><br>
         
-        <input type="submit" class="botonFormulario" value="Crear">
+        <input type="submit" class="botonFormulario" value="Actualizar">
     </form>
 </div>
 
