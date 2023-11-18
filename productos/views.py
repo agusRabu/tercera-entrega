@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 from productos.models import Producto
 from categorias.models import Categoria
 
@@ -26,7 +27,9 @@ def altaProductos (request):
     if request.method =='POST':
         nombre_producto = request.POST.get('nombre_producto')
         stock = request.POST.get('stock')
-        categoria = request.POST.get('categoria')
+        categoria_id  = request.POST.get('categoria')
+
+        categoria = get_object_or_404(Categoria, id=categoria_id)
 
         producto = Producto(nombre_producto = nombre_producto, stock = stock, categoria = categoria)
         producto.save()
@@ -48,7 +51,7 @@ def editarProducto(request):
     producto = Producto.objects.get(id=id)
     producto.nombre_producto = nombre
     producto.stock = stock
-    producto.categoria = categoria
+    producto.categoria.id = categoria
     producto.save()
     messages.success(request, '¡Producto actualizado!')
 
