@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.contrib import messages
 from productos.models import Producto
+from categorias.models import Categoria
 
 def productos (request):
     buscador = request.GET.get('buscar')
@@ -20,6 +22,7 @@ def productos (request):
     return render(request, 'productos/productos.html', {'listado_de_productos': listado_de_productos, 'mensaje': mensaje})
 
 def altaProductos (request):
+    categorias = Categoria.objects.all()
     if request.method =='POST':
         nombre_producto = request.POST.get('nombre_producto')
         stock = request.POST.get('stock')
@@ -27,4 +30,21 @@ def altaProductos (request):
 
         producto = Producto(nombre_producto = nombre_producto, stock = stock, categoria = categoria)
         producto.save()
-    return render(request, 'productos/altaProductos.html', {})
+        messages.success(request, '¡Producto Agregado!')
+
+    return render(request, 'productos/altaProductos.html', {'categorias': categorias})
+
+def edicionProducto(request, nombre):
+    categorias = Categoria.objects.all()
+    producto = Producto.objects.get(nombre_producto=nombre)
+    return render(request, "edicionProducto.html", {"producto": producto, 'categorias': categorias})
+
+
+
+def eliminarProducto(request, nombre):
+    producto = Producto.objects.get(nombre_producto=nombre)
+    producto.delete()
+
+    messages.success(request, '¡Producto eliminado!')
+
+    return redirect('/')
