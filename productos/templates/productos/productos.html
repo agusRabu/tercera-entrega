@@ -9,6 +9,15 @@ Productos
 {% endblock h1_header %}
 
 {% block main %}
+    <div style="width:30%;">
+        <form action="">
+            <input type="text" name="buscar" class="elementoFormularioBuscar" placeholder="Buscar...">
+            <input type="submit" value="Buscar" class="botonBuscar">
+        </form>
+    </div>
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
     <ul>
         {% for producto in listado_de_productos %}
             <li>{{producto}}</li>
