@@ -11,7 +11,7 @@ def productos (request):
     if buscador:
         listado_de_productos = Producto.objects.filter(
             Q(nombre_producto__icontains=buscador.lower()) |
-            Q(categoria__icontains=buscador.lower())
+            Q(categoria__nombre_categoria__icontains=buscador.lower())
         )
 
         if not listado_de_productos:
@@ -37,9 +37,20 @@ def altaProductos (request):
 def edicionProducto(request, nombre):
     categorias = Categoria.objects.all()
     producto = Producto.objects.get(nombre_producto=nombre)
-    return render(request, "edicionProducto.html", {"producto": producto, 'categorias': categorias})
+    return render(request, "productos/edicionProducto.html", {"producto": producto, 'categorias': categorias})
 
+def editarProducto(request):
+    id = request.POST['idProducto']
+    nombre = request.POST['nombre_producto']
+    stock = request.POST['stock']
+    categoria = request.POST['categoria']
 
+    producto = Producto.objects.get(id=id)
+    producto.nombre_producto = nombre
+    producto.stock = stock
+    producto.categoria = categoria
+    producto.save()
+    messages.success(request, '¡Producto actualizado!')
 
 def eliminarProducto(request, nombre):
     producto = Producto.objects.get(nombre_producto=nombre)

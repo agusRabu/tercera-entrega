@@ -18,9 +18,32 @@ Productos
     {% if mensaje %}
         <p>{{ mensaje }}</p>
     {% endif %}
-    <ul>
-        {% for producto in listado_de_productos %}
-            <li>{{producto}}</li>
-        {% endfor %}
-    </ul>
+    <div class="listado">
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Categoria</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% for producto in listado_de_productos %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{producto.id}}</td>
+                    <td>{{producto.nombre_producto}}</td>
+                    <td>{{producto.categoria}}</td>
+                    <td><a href="edicionProducto/{{producto.id}}" class="btn btn-info">Editar</a></td>
+                    <td><a href="eliminarCurso/{{producto.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                </tr>
+            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    
 {% endblock main %}

@@ -22,6 +22,7 @@ Alta Usuarios
     {% endif %}
     <form action="/editarProducto/" method="POST">
         {% csrf_token %}
+        <input type="hidden" value="{{producto.id}}" id="idProducto" name="idProducto">
         <label for="nombre_producto" class="elementosFormulario">Nombre de producto:</label><br>
         <input type="text" value="{{producto.nombre_producto}}" name="nombre_producto" id="nombre_producto" class="elementosFormulario"><br>
         
