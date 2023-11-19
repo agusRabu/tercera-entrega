@@ -1,5 +1,5 @@
-super usuario: admin
-contraseña: salamin
+El CRUD está en producto
 -------------------------------
-El buscador está en usuario
+Las categorias de producto se cargan desde categorías
+El desplegable se lista en base a lo que esté en la tabla de categorias
 -------------------------------
