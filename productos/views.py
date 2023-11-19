@@ -70,3 +70,8 @@ def eliminarProducto(request, id):
     messages.success(request, '¡Producto eliminado!')
 
     return redirect('/productos')
+
+def verMas(request, id):
+    categorias = Categoria.objects.all()
+    producto = Producto.objects.get(id=id)
+    return render(request, "productos/verProducto.html", {"producto": producto, 'categorias': categorias})

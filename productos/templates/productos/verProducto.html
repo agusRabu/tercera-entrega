@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Detalles producto
+{% endblock title_head %}
+
+{% block h1_header %}
+Detalles producto
+{% endblock h1_header %}
+
+{% block header %}{% endblock header %}
+
+{% block main %}
+<div class="container py-2">
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            Producto:
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            {{producto.nombre_producto}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            Codigo:
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            {{producto.id}}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            Categoria:
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            {{producto.categoria}}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            Stock:
+        </div>
+        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+            {{producto.stock}}
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

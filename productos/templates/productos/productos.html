@@ -37,7 +37,7 @@ Productos
                         <th>Código</th>
                         <th>Nombre</th>
                         <th>Categoria</th>
-                        <th colspan="2">Opciones</th>
+                        <th colspan="3">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +48,7 @@ Productos
                     <td>{{producto.categoria}}</td>
                     <td><a href="edicionProducto/{{producto.id}}" class="btn btn-info">Editar</a></td>
                     <td><a href="eliminarProducto/{{producto.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    <td><a href="verMas/{{producto.id}}">Leer más</a></td>
                 </tr>
             {% endfor %}
                     </tbody>
