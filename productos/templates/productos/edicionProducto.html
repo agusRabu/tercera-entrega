@@ -20,14 +20,14 @@ Alta Usuarios
         </div>
         {% endfor %}
     {% endif %}
-    <form action="/editarProducto/" method="POST">
+    <form action="{% url 'editarProducto' %}" method="POST">
         {% csrf_token %}
         <input type="hidden" value="{{producto.id}}" id="idProducto" name="idProducto">
         <label for="nombre_producto" class="elementosFormulario">Nombre de producto:</label><br>
         <input type="text" value="{{producto.nombre_producto}}" name="nombre_producto" id="nombre_producto" class="elementosFormulario"><br>
         
         <label for="stock" class="elementosFormulario">Stock</label><br>
-        <input type="number" value="{{producto.stock}} name="stock" id="stock" class="elementosFormulario"><br>
+        <input type="number" value="{{producto.stock}}" name="stock" id="stock" class="elementosFormulario"><br>
         
         <label for="categoria" class="elementosFormulario">Categoría:</label><br>
         <select name="categoria" id="categoria" value="{{producto.categoria}}  class="elementosFormulario">

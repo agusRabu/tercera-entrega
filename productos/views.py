@@ -43,17 +43,23 @@ def edicionProducto(request, id):
     return render(request, "productos/edicionProducto.html", {"producto": producto, 'categorias': categorias})
 
 def editarProducto(request):
-    id = request.POST['idProducto']
-    nombre = request.POST['nombre_producto']
-    stock = request.POST['stock']
-    categoria = request.POST['categoria']
+    if request.method == 'POST':
+        id = request.POST['idProducto']
+        nombre = request.POST['nombre_producto']
+        stock = request.POST['stock']
+        categoria_id = request.POST['categoria']
 
-    producto = Producto.objects.get(id=id)
-    producto.nombre_producto = nombre
-    producto.stock = stock
-    producto.categoria.id = categoria
-    producto.save()
-    messages.success(request, '¡Producto actualizado!')
+        producto = Producto.objects.get(id=id)
+        producto.nombre_producto = nombre
+        producto.stock = stock
+
+        try:
+            categoria = Categoria.objects.get(id=categoria_id)
+            producto.categoria = categoria
+            producto.save()
+            messages.success(request, '¡Producto actualizado!')
+        except Categoria.DoesNotExist:
+            messages.error(request, 'La categoría seleccionada no existe.')
 
     return redirect('/productos')
 
