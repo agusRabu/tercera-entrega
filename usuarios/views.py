@@ -1,9 +1,10 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login as django_login
 from django.db.models import Q
 from usuarios.models import Usuario
+from usuarios.forms import FormularioAltaUsuario
 
 def usuarios (request):
     buscador = request.GET.get('buscar')
@@ -24,16 +25,14 @@ def usuarios (request):
     return render(request, 'usuarios/usuarios.html', {'listado_de_usuarios': listado_de_usuarios, 'mensaje': mensaje})
 
 def altaUusarios(request):
-    if request.method =='POST':
-        nombre_usuario = request.POST.get('nombre_usuario')
-        nombre = request.POST.get('nombre')
-        apellido = request.POST.get('apellido')
-        password = request.POST.get('password')
-        ultima_vez = datetime.now()
+    formulario = FormularioAltaUsuario()
+    if request.method == 'POST':
+        formulario = FormularioAltaUsuario(request.POST)
+        if formulario.is_valid():
+            formulario.save()
 
-        usuario = Usuario(nombre_usuario = nombre_usuario.lower(), nombre = nombre, apellido = apellido, password = password, ultima_vez = ultima_vez)
-        usuario.save()
-    return render(request, 'usuarios/altaUsuarios.html', {})
+            return redirect('login')
+    return render(request, 'usuarios/altaUsuarios.html', {'formulario_de_registro': formulario})
 
 def login(request):
     

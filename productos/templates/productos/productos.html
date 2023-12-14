@@ -46,8 +46,10 @@ Productos
                     <td>{{producto.id}}</td>
                     <td>{{producto.nombre_producto}}</td>
                     <td>{{producto.categoria}}</td>
+                    {% if request.user.is_authenticated %}
                     <td><a href="edicionProducto/{{producto.id}}" class="btn btn-info">Editar</a></td>
                     <td><a href="eliminarProducto/{{producto.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    {% endif %}
                     <td><a href="verMas/{{producto.id}}">Leer más</a></td>
                 </tr>
             {% endfor %}

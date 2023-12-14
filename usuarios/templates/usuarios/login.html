@@ -14,7 +14,10 @@ Login
 <div class="centrarFormulario">
     <form action={% url "login" %} method="POST">
         {% csrf_token %}
-       {{formulario_de_login}}
+        <table>
+            {{formulario_de_login}}
+        </table>
+       
         
         <input type="submit" class="botonFormulario" value="Ingresar">
     </form>
