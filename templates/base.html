@@ -26,13 +26,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href={% url "inicio" %}>Inicio</a></li>
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href={% url "usuarios" %}>Usuarios</a></li>
                         <li class="nav-item"><a class="nav-link" href={% url "altaUsuarios" %}>Crear Usuario</a></li>
+                        {% endif %}
                         <li class="nav-item"><a class="nav-link" href={% url "productos" %}>Productos</a></li>
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href={% url "altaProductos" %}>Crear Productos</a></li>
+                        {% endif %}
                         <li class="nav-item"><a class="nav-link" href={% url "categorias" %}>Categorías</a></li>
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href={% url "altaCategorias" %}>Crear Categorías</a></li>
+                        {% endif %}
                         <li class="nav-item"><a class="nav-link" href={% url "aboutUs" %}>Acerca de Nosotros</a></li>
+                        {% if not request.user.is_authenticated %}
+                        <li class="nav-item"><a class="btn btn-primary" href={% url "aboutUs" %}>Iniciar Sesión</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="btn btn-danger" href={% url "aboutUs" %}>Cerrar Sesión</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

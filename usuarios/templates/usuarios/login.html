@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Login
+{% endblock title_head %}
+
+{% block h1_header %}
+Login
+{% endblock h1_header %}
+
+{% block header %}{% endblock header %}
+
+{% block main %}
+<div class="centrarFormulario">
+    <form action={% url "login" %} method="POST">
+        {% csrf_token %}
+       {{formulario_de_login}}
+        
+        <input type="submit" class="botonFormulario" value="Ingresar">
+    </form>
+</div>
+
+{% endblock main %}
