@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block title_head %}
-Alta Usuarios
+Alta Productos
 {% endblock title_head %}
 
 {% block h1_header %}
-Alta Usuarios
+Alta Productos
 {% endblock h1_header %}
 
 {% block header %}{% endblock header %}
@@ -20,7 +20,7 @@ Alta Usuarios
         </div>
         {% endfor %}
     {% endif %}
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="nombre_producto" class="elementosFormulario">Nombre de producto:</label><br>
         <input type="text" name="nombre_producto" id="nombre_producto" class="elementosFormulario"><br>
@@ -34,6 +34,10 @@ Alta Usuarios
             <option value ="{{c.id}}">{{c.nombre_categoria}}</option>
             {% endfor %}
         </select><br>
+
+        <label for="id_imagen">Imagen:</label>
+        <input type="file" name="imagen" accept="image/*"> <br>
+
         
         <input type="submit" class="botonFormulario" value="Crear">
     </form>

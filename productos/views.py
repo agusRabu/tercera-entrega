@@ -26,12 +26,13 @@ def altaProductos (request):
     categorias = Categoria.objects.all()
     if request.method =='POST':
         nombre_producto = request.POST.get('nombre_producto')
-        stock = request.POST.get('stock')
-        categoria_id  = request.POST.get('categoria')
+        stock           = request.POST.get('stock')
+        categoria_id    = request.POST.get('categoria')
+        imagen          = request.FILES.get('imagen')
 
         categoria = get_object_or_404(Categoria, id=categoria_id)
 
-        producto = Producto(nombre_producto = nombre_producto, stock = stock, categoria = categoria)
+        producto = Producto(nombre_producto = nombre_producto, stock = stock, categoria = categoria, imagen=imagen)
         producto.save()
         messages.success(request, '¡Producto Agregado!')
 
@@ -48,14 +49,17 @@ def editarProducto(request):
         nombre = request.POST['nombre_producto']
         stock = request.POST['stock']
         categoria_id = request.POST['categoria']
+        imagen          = request.FILES.get('imagen')
 
         producto = Producto.objects.get(id=id)
         producto.nombre_producto = nombre
         producto.stock = stock
+        
 
         try:
             categoria = Categoria.objects.get(id=categoria_id)
             producto.categoria = categoria
+            producto.imagen = imagen
             producto.save()
             messages.success(request, '¡Producto actualizado!')
         except Categoria.DoesNotExist:

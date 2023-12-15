@@ -12,6 +12,13 @@ Detalles producto
 
 {% block main %}
 <div class="container py-2">
+    <div >
+        {% if 'productos/' in producto.imagen.url %}
+        <img src="/media/{{producto.imagen}}" width="200px">
+        {% else %}
+        <img src="/media/productos/default.jpg" width="200px">
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
             Producto:
