@@ -12,7 +12,7 @@ Editar usuario
 
 {% block main %}
 <div class="centrarFormulario">
-    <form action={% url "editarUusario" %} method="POST">
+    <form action={% url "editarUsuario" %} method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
             {{formulario}}

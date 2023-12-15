@@ -56,33 +56,37 @@ def login(request):
     
     return render(request, 'usuarios/login.html', {'formulario_de_login': formulario})
 
-def editarUusario(request):
+def editarUsuario(request):
     usuario = request.user.usuario
 
     formulario = FormularioEditarUsuario(initial={'descripcion':usuario.descripcion, 'avatar':usuario.avatar, 'link':usuario.link} , instance=request.user)
     if request.method == 'POST':
-        formulario = FormularioEditarUsuario(request.POST, instance=request.user)
+        formulario = FormularioEditarUsuario(request.POST, request.FILES, instance=request.user)
         if formulario.is_valid():
             
             descripcion = formulario.cleaned_data.get('descripcion')
             if descripcion:
                 usuario.descripcion = descripcion
-                usuario.save()
             
             avatar = formulario.cleaned_data.get('avatar')
             if avatar:
                 usuario.avatar = avatar
-                usuario.save()
 
             link = formulario.cleaned_data.get('link')
             if link:
                 usuario.link = link
-                usuario.save()
+            
+            usuario.save()
             
             formulario.save()
-            return redirect('inicio')
-    return render(request, 'usuarios/editarUusario.html', {'formulario':formulario})
+            return redirect('perfil')
+    return render(request, 'usuarios/editarUsuario.html', {'formulario':formulario})
+
+def perfil(request):
+    usuario = request.user.usuario
+    return render(request, "usuarios/perfil.html", {"usuario": usuario})
 
 class CambiarPassword(PasswordChangeView):
     template_name = 'usuarios/editarPassword.html'
-    success_url = reverse_lazy('editarUusario')
+    success_url = reverse_lazy('editarUsuario')
+
