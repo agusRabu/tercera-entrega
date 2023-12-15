@@ -41,13 +41,17 @@ Alta Usuarios
             {% endfor %}
             <!-- Acá debería estar listando de la base pero ya no quiero más nada con esta entrega, para la próxima será-->
         </select><br>
+        
         {% if 'productos/' in producto.imagen.url %}
         <img src="/media/{{producto.imagen}}" width="200px">
         {% else %}
         <img src="/media/productos/default.jpg" width="200px">
         {% endif %}
         <label for="id_imagen">Imagen:</label>
-        <input type="file" name="imagen" accept="image/*"> <br>
+        <input type="file" name="imagen" accept="image/*"> <br><br>
+
+        <label for="start">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" value="{{fecha}}" min="2023-12-01" max="2030-12-31" /><br>
         
         <input type="submit" class="botonFormulario" value="Actualizar">
     </form>

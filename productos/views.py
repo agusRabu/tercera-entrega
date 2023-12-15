@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib import messages
@@ -29,10 +30,11 @@ def altaProductos (request):
         stock           = request.POST.get('stock')
         categoria_id    = request.POST.get('categoria')
         imagen          = request.FILES.get('imagen')
+        fecha           = request.POST.get('fecha')
 
         categoria = get_object_or_404(Categoria, id=categoria_id)
 
-        producto = Producto(nombre_producto = nombre_producto, stock = stock, categoria = categoria, imagen=imagen)
+        producto = Producto(nombre_producto = nombre_producto, stock = stock, categoria = categoria, imagen=imagen, fecha=fecha)
         producto.save()
         messages.success(request, '¡Producto Agregado!')
 
@@ -41,15 +43,17 @@ def altaProductos (request):
 def edicionProducto(request, id):
     categorias = Categoria.objects.all()
     producto = Producto.objects.get(id=id)
-    return render(request, "productos/edicionProducto.html", {"producto": producto, 'categorias': categorias})
+    fecha_formateada = producto.fecha.strftime('%Y-%m-%d')
+    return render(request, "productos/edicionProducto.html", {"producto": producto, 'categorias': categorias, 'fecha': fecha_formateada})
 
 def editarProducto(request):
     if request.method == 'POST':
-        id = request.POST['idProducto']
-        nombre = request.POST['nombre_producto']
-        stock = request.POST['stock']
+        id           = request.POST['idProducto']
+        nombre       = request.POST['nombre_producto']
+        stock        = request.POST['stock']
         categoria_id = request.POST['categoria']
-        imagen          = request.FILES.get('imagen')
+        imagen       = request.FILES.get('imagen')
+        fecha        =  request.POST['fecha']
 
         producto = Producto.objects.get(id=id)
         producto.nombre_producto = nombre
@@ -60,6 +64,7 @@ def editarProducto(request):
             categoria = Categoria.objects.get(id=categoria_id)
             producto.categoria = categoria
             producto.imagen = imagen
+            producto.fecha = fecha
             producto.save()
             messages.success(request, '¡Producto actualizado!')
         except Categoria.DoesNotExist:
