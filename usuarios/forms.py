@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 class FormularioAltaUsuario(UserCreationForm):
@@ -11,3 +11,13 @@ class FormularioAltaUsuario(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         help_text = {'username': '', 'email': '', 'password1': '', 'password2': ''}
+
+class FormularioEditarUsuario(UserChangeForm):
+    password = None
+    email = forms.EmailField(label='Cambiar Email', required=False)
+    first_name = forms.CharField(label= 'Cambiar Nombre', required=False)
+    last_name = forms.CharField(label= 'Cambiar Apellido', required=False)
+    
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name']

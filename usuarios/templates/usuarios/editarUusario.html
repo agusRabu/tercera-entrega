@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Editar usuario
+{% endblock title_head %}
+
+{% block h1_header %}
+Editar usuario
+{% endblock h1_header %}
+
+{% block header %}{% endblock header %}
+
+{% block main %}
+<div class="centrarFormulario">
+    <form action={% url "editarUusario" %} method="POST">
+        {% csrf_token %}
+        <table>
+            {{formulario}}
+        </table>
+       
+        
+        <input type="submit" class="botonFormulario" value="Editar">
+    </form><br><br>
+    <a href={% url "editarPassword" %} class="btn btn-warning"> Cambiar contraseña</a>
+</div>
+
+{% endblock main %}
