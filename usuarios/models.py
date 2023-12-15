@@ -1,12 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# esto no tiene mucho sentido porque por defecto ya hay un manejo de usuarios 
 class Usuario(models.Model):
-    nombre_usuario = models.TextField()
-    nombre = models.TextField()
-    apellido = models.TextField()
-    ultima_vez = models.DateTimeField()
-    password = models.TextField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
+    descripcion = models.CharField(max_length=300, default='')
+    avatar = models.ImageField(upload_to='avatars', null=True, blank=True, default='default.jpg')
+    link = models.URLField(null=True, blank=True, default=None)
+    """ultima_vez = models.DateTimeField()
+    password = models.TextField()"""
 
     def __str__(self):
         return f'{self.nombre} - {self.apellido} - Última conexión: {self.ultima_vez}'

@@ -50,15 +50,35 @@ def login(request):
             user = authenticate(username = usuario, password = contra)
             django_login(request, user)
 
+            usuario = Usuario.objects.get_or_create(user=request.user)
+
             return redirect('inicio')
     
     return render(request, 'usuarios/login.html', {'formulario_de_login': formulario})
 
 def editarUusario(request):
-    formulario = FormularioEditarUsuario( instance=request.user)
+    usuario = request.user.usuario
+
+    formulario = FormularioEditarUsuario(initial={'descripcion':usuario.descripcion, 'avatar':usuario.avatar, 'link':usuario.link} , instance=request.user)
     if request.method == 'POST':
         formulario = FormularioEditarUsuario(request.POST, instance=request.user)
         if formulario.is_valid():
+            
+            descripcion = formulario.cleaned_data.get('descripcion')
+            if descripcion:
+                usuario.descripcion = descripcion
+                usuario.save()
+            
+            avatar = formulario.cleaned_data.get('avatar')
+            if avatar:
+                usuario.avatar = avatar
+                usuario.save()
+
+            link = formulario.cleaned_data.get('link')
+            if link:
+                usuario.link = link
+                usuario.save()
+            
             formulario.save()
             return redirect('inicio')
     return render(request, 'usuarios/editarUusario.html', {'formulario':formulario})

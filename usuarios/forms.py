@@ -17,7 +17,10 @@ class FormularioEditarUsuario(UserChangeForm):
     email = forms.EmailField(label='Cambiar Email', required=False)
     first_name = forms.CharField(label= 'Cambiar Nombre', required=False)
     last_name = forms.CharField(label= 'Cambiar Apellido', required=False)
+    descripcion = forms.CharField(label= 'Descripción', required=False, widget=forms.Textarea)
+    link = forms.URLField(label= 'Link', required=False)
+    avatar = forms.ImageField(label='Avatar', required=False)
     
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = ['email', 'first_name', 'last_name', 'descripcion', 'link', 'avatar']
