@@ -2,7 +2,6 @@ from django.db import models
 #from ckeditor.fields import RichTextField
 from categorias.models import Categoria
 
-# esto no tiene mucho sentido porque por defecto ya hay un manejo de usuarios 
 class Producto(models.Model):
     nombre_producto = models.TextField()
     stock = models.TextField()

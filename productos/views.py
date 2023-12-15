@@ -1,8 +1,7 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
 from productos.models import Producto
 from categorias.models import Categoria
 
@@ -43,7 +42,10 @@ def altaProductos (request):
 def edicionProducto(request, id):
     categorias = Categoria.objects.all()
     producto = Producto.objects.get(id=id)
-    fecha_formateada = producto.fecha.strftime('%Y-%m-%d')
+    if producto.fecha:
+        fecha_formateada = producto.fecha.strftime('%Y-%m-%d')
+    else:
+        fecha_formateada = None
     return render(request, "productos/edicionProducto.html", {"producto": producto, 'categorias': categorias, 'fecha': fecha_formateada})
 
 def editarProducto(request):
@@ -63,7 +65,8 @@ def editarProducto(request):
         try:
             categoria = Categoria.objects.get(id=categoria_id)
             producto.categoria = categoria
-            producto.imagen = imagen
+            if imagen:
+                producto.imagen = imagen
             producto.fecha = fecha
             producto.save()
             messages.success(request, '¡Producto actualizado!')
