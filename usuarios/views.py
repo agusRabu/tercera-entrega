@@ -6,15 +6,15 @@ from django.contrib.auth.views import PasswordChangeView
 from django.db.models import Q
 from django.urls import reverse_lazy
 
-from usuarios.models import Usuario
+from usuarios.models import Usuario, User
 from usuarios.forms import FormularioAltaUsuario, FormularioEditarUsuario
 
 def usuarios (request):
     buscador = request.GET.get('buscar')
     mensaje = None
     
-    if buscador:
-        listado_de_usuarios = Usuario.objects.filter(
+    """ if buscador:
+        listado_de_usuarios = User.objects.filter(
             Q(nombre_usuario__icontains=buscador.lower()) |
             Q(nombre__icontains=buscador.lower()) |
             Q(apellido__icontains=buscador.lower()) 
@@ -22,8 +22,8 @@ def usuarios (request):
 
         if not listado_de_usuarios:
             mensaje = "No se encontraron usuarios que coincidan con la búsqueda."
-    else:
-        listado_de_usuarios = Usuario.objects.all()
+    else:"""
+    listado_de_usuarios = User.objects.all()
 
     return render(request, 'usuarios/usuarios.html', {'listado_de_usuarios': listado_de_usuarios, 'mensaje': mensaje})
 
