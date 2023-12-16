@@ -31,7 +31,15 @@ Mi perfil
                 Apellido:
             </div>
             <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-                {{usuario.last_name}}
+                {{request.user.last_name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                altaUsuarios:
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                {{request.user.username}}
             </div>
         </div>
     </div>
